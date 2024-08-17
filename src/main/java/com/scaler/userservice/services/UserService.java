@@ -81,6 +81,11 @@ public class UserService {
     }
 
     public User validateToken(String tokenValue) {
-        return null;
+        Optional<Token> optionalToken = tokenRepository.findByValueAndDeletedAndExpiryDateGreaterThan(tokenValue, false, new Date());
+        if (optionalToken.isEmpty()) {
+//            TODO: Throw Exception
+            return null;
+        }
+        return optionalToken.get().getUser();
     }
 }

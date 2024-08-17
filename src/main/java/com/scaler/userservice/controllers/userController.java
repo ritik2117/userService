@@ -49,9 +49,10 @@ public class userController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping("/validate/{token}")
-    public UserDto validateToken(@PathVariable String token) {
-        return null;
+    @GetMapping("/validate/{tokenValue}")
+    public UserDto validateToken(@PathVariable String tokenValue) {
+        User user = userService.validateToken(tokenValue);
+        return UserDto.from(user);
     }
 
     @GetMapping("/{id}")
