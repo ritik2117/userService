@@ -7,6 +7,7 @@ import com.scaler.userservice.dtos.UserDto;
 import com.scaler.userservice.models.Token;
 import com.scaler.userservice.models.User;
 import com.scaler.userservice.services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +41,12 @@ public class userController {
 
     @PutMapping("/logout")
     public ResponseEntity<Void> logout(@RequestBody LogOutRequestDto requestDto) {
-        return null;
+//        TODO: Put it in try catch block when raised the exception from logout service
+        if (requestDto != null) {
+            userService.logout(requestDto.getTokenValue());
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/validate/{token}")

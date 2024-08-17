@@ -70,7 +70,14 @@ public class UserService {
     }
 
     public void logout(String tokenValue) {
-
+//        Check if it is the valid token or is it deleted
+        Optional<Token> optionalToken = tokenRepository.findByValueAndDeleted(tokenValue, false);
+        if (optionalToken.isEmpty()) {
+//            TODO: Throw exception
+        }
+        Token token = optionalToken.get();
+        token.setDeleted(true);
+        tokenRepository.save(token);
     }
 
     public User validateToken(String tokenValue) {
