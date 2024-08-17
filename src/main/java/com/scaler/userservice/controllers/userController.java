@@ -31,7 +31,11 @@ public class userController {
 
     @PostMapping("/login")
     public Token login(@RequestBody LoginRequestDto requestDto) {
-        return null;
+        Token token = new Token();
+        if (requestDto != null) {
+            token = userService.login(requestDto.getEmail(), requestDto.getPassword());
+        }
+        return token;
     }
 
     @PutMapping("/logout")
