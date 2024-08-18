@@ -91,7 +91,12 @@ public class SecurityConfiguration {
         return new InMemoryUserDetailsManager(userDetails);
     }
 
-    @Bean
+    /**
+     * As implemented with Spring Authorization Server with JPA, class: JpaRegisteredClientRepository
+     * So, commneted the code here
+     * @return
+     */
+    /*@Bean
     public RegisteredClientRepository registeredClientRepository() {
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("oidc-client")
@@ -108,7 +113,7 @@ public class SecurityConfiguration {
                 .build();
 
         return new InMemoryRegisteredClientRepository(oidcClient);
-    }
+    }*/
 
     @Bean
     public JWKSource<SecurityContext> jwkSource() {
