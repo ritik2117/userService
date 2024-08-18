@@ -81,11 +81,13 @@ public class UserService {
     }
 
     public User validateToken(String tokenValue) {
+        System.out.println("Entering validateToken method in UserService");
         Optional<Token> optionalToken = tokenRepository.findByValueAndDeletedAndExpiryDateGreaterThan(tokenValue, false, new Date());
         if (optionalToken.isEmpty()) {
 //            TODO: Throw Exception
             return null;
         }
+        System.out.println("returning from validateToken method in UserService");
         return optionalToken.get().getUser();
     }
 }
