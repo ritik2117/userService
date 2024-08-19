@@ -80,7 +80,12 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-    @Bean
+    /**
+     * Implemented this functionality through Spring Authorization Server with JPA
+     * To implement it through JPA:
+     * Implemented UserDetails, GrantedAuthority and UserDetailsService interfaces.
+     */
+    /*@Bean
     public UserDetailsService userDetailsService() {
         UserDetails userDetails = User.builder()
                 .username("user")
@@ -89,7 +94,7 @@ public class SecurityConfiguration {
                 .build();
 
         return new InMemoryUserDetailsManager(userDetails);
-    }
+    }*/
 
     /**
      * As implemented with Spring Authorization Server with JPA, class: JpaRegisteredClientRepository

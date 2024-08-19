@@ -22,7 +22,7 @@ class UserServiceApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
+	/*@Test
 	public void addSampleRegisteredClient() {
 		RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
 				.clientId("oidc-client")
@@ -39,6 +39,6 @@ class UserServiceApplicationTests {
 				.build();
 
 		registeredClientRepository.save(oidcClient);
-	}
+	}*/
 
 }
