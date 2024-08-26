@@ -1,5 +1,6 @@
 package com.scaler.userservice.security.models;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.scaler.userservice.models.Role;
 import com.scaler.userservice.models.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,7 +18,9 @@ import java.util.List;
  * so created CustomUserDetails class (Returned by Spring Authorization Server)
  * to map the values to User entity
  */
+@JsonDeserialize
 public class CustomUserDetails implements UserDetails {
+    private Long userId;
     private String username;
     private String password;
     private List<CustomGrantedAuthority> authorities;
@@ -26,7 +29,15 @@ public class CustomUserDetails implements UserDetails {
     private boolean credentialsNonExpired;
     private boolean enabled;
 
+    /**
+     * Needed by Jackson to deserialize the object from JSON to
+     * CustomUserDetails object (DTO) of User Entity
+     */
+    public CustomUserDetails() {
+    }
+
     public CustomUserDetails(User user) {
+        this.userId = user.getId();
         this.username = user.getEmail();
         this.password = user.getHashedPassword();
         this.accountNonExpired = true;
@@ -81,5 +92,9 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
 //        return UserDetails.super.isEnabled();
         return enabled;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 }

@@ -1,5 +1,6 @@
 package com.scaler.userservice.security.models;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.scaler.userservice.models.Role;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,9 +14,17 @@ import java.util.List;
  * with the Role Entity.
  */
 @Data
+@JsonDeserialize
 public class CustomGrantedAuthority implements GrantedAuthority {
 //    private Role role;
     private String authority;
+
+    /**
+     * Needed by Jackson to deserialize the object from JSON to
+     * CustomGrantedAuthority object (DTO) of Role Entity
+     */
+    public CustomGrantedAuthority() {
+    }
 
     public CustomGrantedAuthority(Role role) {
         this.authority = role.getValue();
